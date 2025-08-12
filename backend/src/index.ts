@@ -1,5 +1,7 @@
 import express from 'express'
 import dotenv from 'dotenv'
+import productsRoutes from './routes/productsRoutes'
+import cartRoutes from './routes/cartRoutes'
 
 dotenv.config()
 
@@ -10,6 +12,12 @@ api.use(express.json())
 
 // test api
 api.get('/', (req, res) => res.json({status: 'running', apiName: 'Api Rest - HoyTrabajas', dev: 'Daniel Merchan'}))
+
+// call router for products
+api.use('/products', productsRoutes)
+
+// call router for cart
+api.use('/cart', cartRoutes)
 
 const PORT = process.env.PORT || 4000
 api.listen(PORT, () => {
