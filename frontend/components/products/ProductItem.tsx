@@ -1,9 +1,17 @@
+'use client'
+
+import { addProductToCart } from '@/actions/addProductToCart';
 import { Product } from '@/types/types';
 import Image from "next/image";
 import Link from "next/link";
 
 export const ProductItem = ({product}: {product: Product}) => {
-  const {id, name, price} = product
+  const {id, name, price} = product;
+
+  const addProductHandle = async () => {
+    const res = await addProductToCart(id)
+
+  }
   return (
     <div className="bg-white p-2 rounded-xl">
       <Link href={"/"} className="flex flex-col gap-4">
@@ -22,7 +30,9 @@ export const ProductItem = ({product}: {product: Product}) => {
 
       <p>$ {price}</p>
 
-      <button className="bg-gray-100 hover:bg-yellow-300 mt-2 py-1 border border-gray-300 hover:border-yellow-500 rounded-lg w-full text-center transition-colors">
+      <button 
+        onClick={addProductHandle}
+      className="bg-gray-100 hover:bg-yellow-300 mt-2 py-1 border border-gray-300 hover:border-yellow-500 rounded-lg w-full text-center transition-colors">
         Agregar al carrito
       </button>
     </div>

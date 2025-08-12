@@ -1,1 +1,1 @@
-export const apiLink = 'http://localhost:4000'
+export const apiLink = process.env.NEXT_PUBLIC_API_URL;
