@@ -1,6 +1,12 @@
-# API REST - HoyTrabajas
+# API REST E-Commerce - HoyTrabajas
 
-Este proyecto es una API REST básica para manejar productos y un carrito de compras, esta construida bajo la arquitectura MVC usando Node.js para el backend y Next.js para el frontend, todo en TypeScript.
+![Banner](./frontend/public/readme/hero.jpg)
+
+Este proyecto es una API REST con E-Commerce básico para seleccionar productos y un carrito de compras, esta construida bajo la arquitectura MVC usando Node.js para el backend y Next.js para el frontend, todo en TypeScript.
+
+## Demo live
+- Frontend (vercel): [https://api-hoytrabajas.vercel.app/](https://api-hoytrabajas.vercel.app/)
+- Backend API (Render): [https://api-hoytrabajas.onrender.com/](https://api-hoytrabajas.onrender.com/)
 
 # Backend
 Se eligió crear el backend en un proyecto independiente utilizando Node.js y Express.js. La estructura de archivos separa las funcionalidades server, router y controladores para las diferentes peticiones HTTP.
@@ -59,7 +65,7 @@ El frontend está construido con Next.js (App Router) y TypeScript. Utiliza Serv
 - `/presupuesto` Herramienta de selección de productos según presupuesto.
 
 # Lógica
-Para la implementación del ejercicio de lógica se buscó obtener la combinación de productos que en conjunto utilizaran la mayor cantidad del presupuesto sin excederlo.
+Para la implementación del ejercicio de lógica elegí el enfoque de obtener la combinación de productos que en conjunto utilizaran la mayor cantidad del presupuesto sin excederlo.
 
 Recibiendo una lista de productos se procede a verificar las condiciones directas para encontrar productos que encagen con el presupuesto, si no se cumplen, la lista se ordena por precio y de manera descendente para en ultimas ser recorrida agregando en un array resultante de manera eficiente los productos que no excedan y que consuman la mayor cantidad del presupuesto.
 
@@ -104,5 +110,7 @@ En la dirección `/presupuesto` se puede acceder a la implantación del ejercici
 Se renderiza un componente de resumen del presupuesto el cual indica la cantidad de productos, el valor total a gastar y el valor sobrante si lo hubiera.
 
 Ademas se reutiliza el componente de `ProductList` para mostrar los productos seleccionados en el presupuesto.
+
+---
 
 Desarrollado por Daniel Merchan Caceres
