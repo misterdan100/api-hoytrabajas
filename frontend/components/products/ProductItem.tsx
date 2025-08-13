@@ -1,19 +1,26 @@
 'use client'
 
 import { addProductToCart } from '@/actions/addProductToCart';
+import { getCartLength } from '@/actions/getCartLength';
+import { useCart } from '@/hooks/useCart';
 import { Product } from '@/types/types';
 import Image from "next/image";
 import Link from "next/link";
 
 export const ProductItem = ({product}: {product: Product}) => {
   const {id, name, price} = product;
+  const { setQuantity } = useCart()
 
   const addProductHandle = async () => {
     const res = await addProductToCart(id)
+    if(res) {
+      const cartProductsLength = await getCartLength()
+      setQuantity(cartProductsLength)
+    }
 
   }
   return (
-    <div className="bg-white p-2 rounded-xl">
+    <div className="bg-white shadow p-2 rounded-xl">
       <Link href={"/"} className="flex flex-col gap-4">
         <div className="overflow-hidden">
           <Image

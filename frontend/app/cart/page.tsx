@@ -2,6 +2,7 @@
 
 import { getCart } from '@/actions/getCart';
 import { ProductPreview } from "@/components/cart/ProductPreview";
+import { ProductList } from '@/components/products/ProductList';
 import { Cart } from '@/types/types';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
@@ -14,6 +15,7 @@ export default function CartPage() {
     const fetchCart = async () => {
       const data = await getCart()
       setCart(data)
+      console.log(cart)
     }
 
     fetchCart()
@@ -24,26 +26,21 @@ export default function CartPage() {
 
   return (
     <div className="gap-6 grid grid-cols-3 bg-gray-100 p-6 w-full h-full overflow-y-auto">
+
         {/* LEFT side => products preview */}
-        <div className="flex flex-col gap-2 col-span-2 bg-white shadow p-4 rounded-2xl h-fit">
-          <h2 className='font-bold text-lg'>Resumen de Productos:</h2>
-          { cart?.products ? (
-            cart.products.map( product => (
-              <ProductPreview 
-                key={product.id}
-                product={product}
-              />
-            ))
-          ) : (
-            <>
-              <p className='text-gray-500 text-center'>El carrito esta vacio.</p>
-              <Link 
-                href='/'
-                className='font-bold text-gray-500 hover:text-black text-center'
-              >Ver Productos</Link>
-            </>
-          )}
-        </div>
+        { cart?.products.length ? (
+          <div className='col-span-2'>
+            <ProductList products={cart.products}/>
+          </div>
+        ) : (
+          <div className="flex flex-col gap-2 col-span-2 bg-white shadow p-4 rounded-2xl h-fit">
+            <p className='text-gray-500 text-center'>El carrito esta vacio.</p>
+            <Link 
+              href='/'
+              className='font-bold text-gray-500 hover:text-black text-center'
+            >Ver Productos</Link>
+          </div>
+        )}
 
         {/* RIGHT side => cart resume */}
         <div className="flex flex-col gap-2 col-span-1 bg-white shadow p-4 rounded-2xl h-fit">

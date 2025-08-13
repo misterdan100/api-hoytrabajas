@@ -1,10 +1,11 @@
 'use server'
 
-import { apiLink } from '@/config/config'
+import { apiURL } from '@/config/config'
+import { revalidatePath } from 'next/cache'
 
 export const addProductToCart = async (productId: number) => {
   try {
-    const url = `${apiLink}/cart`
+    const url = `${apiURL}/cart`
     
     const res = await fetch(url, {
       method: 'POST',

@@ -2,22 +2,13 @@
 
 import { getProducts } from '@/actions/getProducts';
 import { ProductPreview } from '@/components/cart/ProductPreview';
-import { BudgetSummary, Product } from '@/types/types';
+import { BudgetSummary } from '@/components/presupuesto/BudgetSummary';
+import { ProductList } from '@/components/products/ProductList';
+import { TBudgetSummary, Product } from '@/types/types';
 import { useEffect, useState } from "react";
 
 /*
-[
-  { "id": 3, "name": "Producto 3", "price": 130 },
-  { "id": 3, "name": "Producto 3", "price": 120 },
-  { "id": 3, "name": "Producto 3", "price": 110 },
-	{ "id": 2, "name": "Producto 2", "price": 100 },
-	{ "id": 4, "name": "Producto 4", "price": 90 },
-	{ "id": 4, "name": "Producto 4", "price": 80 },
-	{ "id": 4, "name": "Producto 4", "price": 70 },
-	{ "id": 1, "name": "Producto 1", "price": 60 },
-	{ "id": 4, "name": "Producto 4", "price": 50 },
-]
-
+Ejercicio de Logica
 1. ordenar de mayor a menor
 2. seleccionar solo los que estan dentro del rango
    e.g. si el presupuesto es 150 pero hay productos de mas de 150 descartartlos
@@ -25,13 +16,12 @@ import { useEffect, useState } from "react";
 4. op 2. tomar el producto de mayor valor, restar el presupuesto y evaluar si hay algun producto igual al resulta
 5. op 3. Si no hay un producto igual tomar el siguiente, evaluar restando del presupuesto cuanto sobra de los dos y buscar si hay un producto igual a ese precio
 6. continuar tomando productos y comprobando sin pasarse del presupuesto
-
 */
 
 export default function BudgetPage() {
   const [budget, setBudget] = useState<number>(0);
   const [ products, setProducts ] = useState<Product[] | undefined>(undefined)
-  const [ budgetSummary, setBudgetSummary ] = useState<BudgetSummary | undefined>(undefined)
+  const [ budgetSummary, setBudgetSummary ] = useState<TBudgetSummary | undefined>(undefined)
 
   useEffect(() => {
     if(products) {
@@ -51,7 +41,7 @@ export default function BudgetPage() {
 
   const findBestCombination = (products: Product[], budget: number) => {
 
-    // convert list in a map
+    // todo: convert list in a map
 
     // 2. select range
     const rangedProducts = products.filter( product => product.price <= budget)
@@ -104,7 +94,6 @@ export default function BudgetPage() {
       }
     }    
     return productsInBudget
-
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -117,7 +106,7 @@ export default function BudgetPage() {
     // todo: create a error message
     if(budget <= 0) return
 
-    // get products
+    // get products from api
     const data = await getProducts()
 
     // todo: create a error message
@@ -132,7 +121,7 @@ export default function BudgetPage() {
       <div className="flex flex-col gap-6">
         <form
           onSubmit={handleSubmit}
-          className="gap-2 grid bg-white p-4 rounded-2xl"
+          className="gap-2 grid bg-white shadow p-4 rounded-2xl"
         >
           <label htmlFor="" className='font-bold'>Presupuesto:</label>
           <input
@@ -146,39 +135,11 @@ export default function BudgetPage() {
           >Seleccionar Productos</button>
         </form>
 
-        <div className="gap-4 grid bg-white p-4 rounded-2xl">
-          <p className='font-bold'>Resumen de Presupuesto:</p>
-          {budgetSummary && (
-            <div className='gap-4 grid'>
-              <div>
-                <p className='text-gray-600'>Cantidad de productos:</p>
-                <p className='font-bold'>{ budgetSummary.quantity } Productos</p>
-              </div>
-
-              <div>
-                <p className='text-gray-600'>Valor total:</p>
-                <p className='font-bold'>$ { budgetSummary.totalValue }</p>
-              </div>
-
-              <div>
-                <p className='text-gray-600'>Sobrante:</p>
-                <p className='font-bold'>$ { budgetSummary.remainingValue }</p>
-              </div>
-            </div>
-          )}
-        </div>
+        {budgetSummary && <BudgetSummary budget={budgetSummary}/>}
       </div>
 
       {/* RIGHT - Resumen de productos */}
-      <div className="bg-white p-4 rounded-2xl">
-        <p className='font-bold'>Lista de Productos: {products?.length}</p>
-        { products && products.map( product => (
-          <ProductPreview 
-            key={product.id}
-            product={product}
-          />
-        ))}
-      </div>
+      {products && <ProductList products={products}/>}
     </div>
   );
 }

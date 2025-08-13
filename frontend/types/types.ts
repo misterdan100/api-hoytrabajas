@@ -9,7 +9,7 @@ export type Cart = {
   products: Product[]
 }
 
-export type BudgetSummary = {
+export type TBudgetSummary = {
   quantity: number
   totalValue: number
   remainingValue: number

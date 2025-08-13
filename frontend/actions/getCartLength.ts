@@ -1,22 +1,19 @@
 'use server'
 
 import { apiURL } from '@/config/config'
-import { Cart } from '@/types/types'
 
-export const getCart = async () => {
+export const getCartLength = async () => {
   try {
-
-    const url = `${apiURL}/cart`
+    const url = `${apiURL}/cart?length=true`
 
     const res = await fetch(url)
     const data = await res.json()
 
     if(data) {
-      return data.cart as Cart
+      return data.length
     }
-    
   } catch (error) {
-    console.log('Error getting cart')
+    console.log('Error getting cart length')
     return undefined
   }
 }
