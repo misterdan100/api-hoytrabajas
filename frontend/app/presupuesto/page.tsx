@@ -59,21 +59,19 @@ export default function BudgetPage() {
 
     // 2.1 case: not products in the budge 
     if(rangedProducts.length === 0) {
-      return
+      return []
     }
 
     // 2.2 case: only one product in the range
     if(rangedProducts.length === 1) {
-      setProducts([...rangedProducts])
-      return
+      return [...rangedProducts]
     }
 
     // 3. product equalt to budge
     const equalt = rangedProducts.find( product => product.price === budget)
 
     if(equalt) {
-      setProducts([equalt])
-      return
+      return [equalt]
     }
 
     // 1. order products
@@ -86,33 +84,26 @@ export default function BudgetPage() {
     const productsInBudget = []
     
     // 4. tomar el primero y busca el restante exacto
-    for(let i = 1; i < rangedProducts.length; i++) {
-      if(rangedProducts[i].price === remainingBudget) {
-        setProducts([mayorPriceProduct, rangedProducts[i]])
-        return
+    for(let i = 1; i < orderedProduts.length; i++) {
+      if(orderedProduts[i].price === remainingBudget) {
+        return [mayorPriceProduct, orderedProduts[i]]
       }
     }
 
     // 5. loop search
     productsInBudget.push(mayorPriceProduct)
 
-    for( let i = 1; i < rangedProducts.length; i++) {
-      if(rangedProducts[i].price <= remainingBudget) {
-        remainingBudget -= rangedProducts[i].price
-        productsInBudget.push(rangedProducts[i])
+    for( let i = 1; i < orderedProduts.length; i++) {
+      if(orderedProduts[i].price <= remainingBudget) {
+        remainingBudget -= orderedProduts[i].price
+        productsInBudget.push(orderedProduts[i])
 
-        if(remainingBudget === 0 || rangedProducts[i+1]?.price > remainingBudget) {
-          setProducts(productsInBudget)
+        if(remainingBudget === 0) {
+          break
         }
       }
-    }
-
-    // 5.1 case: for two products in the range
-    setProducts(productsInBudget)
-
-
-    
-    
+    }    
+    return productsInBudget
 
   };
 
@@ -131,7 +122,8 @@ export default function BudgetPage() {
 
     // todo: create a error message
     if(!data) return
-    findBestCombination(data, budget)
+    const budgetList = findBestCombination(data, budget)
+    setProducts(budgetList)
   }
 
   return (
