@@ -116,7 +116,8 @@ export default function BudgetPage() {
   }
 
   return (
-    <div className="justify-center gap-6 grid grid-cols-2 bg-gray-100 p-6 w-full h-full overflow-y-auto">
+    <div className="content-start gap-6 grid md:grid-cols-2 bg-gray-100 p-6 w-full h-full overflow-y-auto">
+
       {/* LEFT - Presupuesto, y resumen de presuesto generado */}
       <div className="flex flex-col gap-6">
         <form

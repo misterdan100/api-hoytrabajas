@@ -8,7 +8,7 @@ export default async function Home() {
   const products = await getProducts()
     
   return (
-    <div className='bg-gray-100 w-full h-full overflow-y-auto'>
+    <div className='justify-center grid bg-gray-100 w-full h-full overflow-y-auto'>
       {products ? (
         <ProductsGrid 
           products={products}

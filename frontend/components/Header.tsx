@@ -22,7 +22,7 @@ export const Header = () => {
   
   
   return (
-    <div className='flex justify-between bg-slate-200 px-10 py-2 w-full'>
+    <div className='flex justify-center md:justify-between bg-slate-200 px-10 py-2 w-full'>
       <div className='flex gap-2'>
         {pages.map( page => (
           <Link 
@@ -41,6 +41,7 @@ export const Header = () => {
           height={25}
           width={25}
           alt='cart'
+          className='min-w-[25px]'
         />
         {quantity > 0 && <span className='font-bold'>{quantity}</span>}
         

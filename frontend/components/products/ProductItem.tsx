@@ -20,7 +20,7 @@ export const ProductItem = ({product}: {product: Product}) => {
 
   }
   return (
-    <div className="bg-white shadow p-2 rounded-xl">
+    <div className="bg-white shadow p-2 rounded-xl w-[190px] md:min-w-[216px]">
       <Link href={"/"} className="flex flex-col gap-4">
         <div className="overflow-hidden">
           <Image

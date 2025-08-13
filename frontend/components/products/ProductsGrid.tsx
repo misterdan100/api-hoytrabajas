@@ -6,7 +6,7 @@ export const ProductsGrid = ({products}: {products: Product[]}) => {
   
   
   return (
-    <main className='flex flex-wrap justify-center gap-4 p-4'>
+    <main className='flex flex-wrap justify-center gap-4 p-4 max-w-[1536px]'>
       {products?.map(product => <ProductItem 
         key={product.id}
         product={product}
