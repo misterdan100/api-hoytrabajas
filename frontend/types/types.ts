@@ -8,3 +8,9 @@ export type Cart = {
   id: number
   products: Product[]
 }
+
+export type BudgetSummary = {
+  quantity: number
+  totalValue: number
+  remainingValue: number
+}

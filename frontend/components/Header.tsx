@@ -25,7 +25,7 @@ export const Header = () => {
           width={25}
           alt='cart'
         />
-        <span className='font-bold'>3</span>
+        {/* <span className='font-bold'>3</span> */}
       </Link>
       
     </div>
