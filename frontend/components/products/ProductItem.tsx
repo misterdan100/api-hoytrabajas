@@ -39,7 +39,7 @@ export const ProductItem = ({product}: {product: Product}) => {
 
       <button 
         onClick={addProductHandle}
-      className="bg-gray-100 hover:bg-yellow-300 mt-2 py-1 border border-gray-300 hover:border-yellow-500 rounded-lg w-full text-center transition-colors">
+      className="bg-gray-100 hover:bg-yellow-300 active:opacity-90 mt-2 py-1 border border-gray-300 hover:border-yellow-500 rounded-lg w-full text-center active:scale-95 transition-colors">
         Agregar al carrito
       </button>
     </div>
