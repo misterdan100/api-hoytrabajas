@@ -52,3 +52,9 @@ export const addProductToCart = (req: Request, res: Response) => {
   
   res.status(200).json({ok: true, message: 'Product added to the cart'})
 };
+
+export const cleanCart = (req: Request, res: Response) => {
+  cart.products = []
+
+  res.status(200).json({ok: true, message: 'Cart was cleaned.'})
+}
